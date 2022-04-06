@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<conio.h>
-#include<string.h>
+#include<assert.h>
 using namespace std;
 class homme{
 	private:
@@ -108,6 +108,19 @@ class LinkedList{
 			}
 			size++;
 		}
+		void dequeue(){
+			if(head==NULL){
+				return;
+			}
+			node *temp=head;
+			while(temp){
+				if(temp=getTop()){
+					temp=NULL;
+					return;
+				}
+				temp=temp->next;
+			}
+		}
 		node *getTop(){
 			node *temp=head;
 			int i=0;
@@ -119,17 +132,14 @@ class LinkedList{
 			return head;
 			}
 		}
-		void dequeue(){
-			if(head==NULL){
-				return;
-			}
+		node *getNode(int indice){
+			assert(indice>=0 && indice<=size);
+			int i=0;
 			node *temp=head;
-			while(temp){
-				if(temp=getTop()){
-					temp=NULL;
-					cout <<"iefyg";
-					return;
-				}
+			while(temp!=NULL){
+				if(i==indice)
+					return temp;
+				i++;
 				temp=temp->next;
 			}
 		}
@@ -145,6 +155,14 @@ class LinkedList{
 				temp=temp->next;
 			}
 		}
+		void printReverse(node *llist){
+			node *temp=llist;
+			if(temp==NULL)
+				return;
+			else
+				printReverse(temp->next);
+			cout << temp->data->getNom() <<"\n";
+		}	
 };
 int main(){
 	homme *h=new homme();
@@ -159,8 +177,10 @@ int main(){
 		l->enqueue(n);
 		l->enqueue(n2);
 		l->enqueue(n2);
-		l->display();
-		l->dequeue();
-		l->display();
+		l->display(); 
+//		cout << l->getNode(2)->data->getNom();
+		l->printReverse(l->head);
+//		l->dequeue();
+//		l->display();
 	return 0;
 }
