@@ -83,7 +83,7 @@ class node{
 			this->prev=n->prev;
 		}
 		void push(string nom,string prenom,int age,string cin ,string tel ){
-			homme *h=new homme(nom ,prenom,age,cin,tel );
+			homme *h=new homme(nom ,prenom,age,cin,tel);
 			data=h;
 			next=NULL;
 			prev=NULL;
@@ -92,26 +92,48 @@ class node{
 class LinkedList{
 	public:
 		node *head;
-		node *tail;
 		int size;
 		LinkedList(){
 			head=NULL;
 			size=0;
 		}
-		void push(node *heaD){
+		void enqueue(node *heaD){
 			node *n=new node(heaD);
 			if(size==0){
 				head=n;
-				tail=n;
 			}
 			else{
-				tail->next=n;
-				tail=n;
+				n->next=head;
+				head=n;
 			}
 			size++;
 		}
+		node *getTop(){
+			node *temp=head;
+			int i=0;
+			while(1){
+				temp=temp->next;
+				i++;
+				if(i==size)
+					temp->data=NULL;
+			return head;
+			}
+		}
+		void dequeue(){
+			if(head==NULL){
+				return;
+			}
+			node *temp=head;
+			while(temp){
+				if(temp=getTop()){
+					temp=NULL;
+					cout <<"iefyg";
+					return;
+				}
+				temp=temp->next;
+			}
+		}
 		void display(){
-			cout << "hello";
 			node *temp=head;
 			while(temp != NULL){
 				cout << "\n";
@@ -134,12 +156,11 @@ int main(){
 		n2->push("Ahmed","Ennaji",25,"G741256","07458219");
 		
 	LinkedList *l=new LinkedList();
-		l->push(n);
-		l->push(n2);
-		l->push(n2);
-		l->push(n2);
-		l->push(n2);
-		l->push(n2);
+		l->enqueue(n);
+		l->enqueue(n2);
+		l->enqueue(n2);
+		l->display();
+		l->dequeue();
 		l->display();
 	return 0;
 }
