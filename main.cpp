@@ -84,37 +84,31 @@ class node{
 		}
 		void push(string nom,string prenom,int age,string cin ,string tel ){
 			homme *h=new homme(nom ,prenom,age,cin,tel );
-			if(data!=NULL){
-				data=h;
-				next=NULL;
-				prev=NULL;
-			}
+			data=h;
+			next=NULL;
+			prev=NULL;
 		}
 };
 class LinkedList{
 	public:
 		node *head;
+		node *tail;
+		int size;
 		LinkedList(){
 			head=NULL;
-		}
-		LinkedList(node *head){
-			this->head=head;
+			size=0;
 		}
 		void push(node *heaD){
-			if(this->head!=NULL){
-				this->head=heaD;
-				this->head->next=NULL;
-				this->head->prev=NULL;
+			node *n=new node(heaD);
+			if(size==0){
+				head=n;
+				tail=n;
 			}
 			else{
-				node *temp=new node();
-				while(temp!=NULL){
-					temp=temp->next;
-				}
-				temp=heaD;
-				temp->next=NULL;
-				temp->prev=NULL;
+				tail->next=n;
+				tail=n;
 			}
+			size++;
 		}
 		void display(){
 			cout << "hello";
@@ -133,9 +127,19 @@ class LinkedList{
 int main(){
 	homme *h=new homme();
 	node *n=new node(h);
-		n->push("Achraf","Taffah",21,"R130419706","0684134782");
-	LinkedList *l=new LinkedList(n);
+		n->push("Achraf","efije",21,"R130419706","0684134782");
+		
+	homme *h2=new homme();
+	node *n2=new node(h2);
+		n2->push("Ahmed","Ennaji",25,"G741256","07458219");
+		
+	LinkedList *l=new LinkedList();
 		l->push(n);
+		l->push(n2);
+		l->push(n2);
+		l->push(n2);
+		l->push(n2);
+		l->push(n2);
 		l->display();
 	return 0;
 }
